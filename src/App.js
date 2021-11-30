@@ -6,8 +6,6 @@ import contacts from './contacts.json'
 
 function Contacts(){
 
-  const [allContacts, setContacts] = useState(contacts)
-
   return (
     <div > {
       contacts.slice(0,5).map((elem) => {
@@ -29,23 +27,21 @@ function Contacts(){
 
 }
 
-// function Prize(){
-//   contacts.map((elem, index)=>{
-//     return(
-//      <div>
-//      {elem.wonEmmy == true && '🏆'}
-//      {elem.wonOscar == true && '🏆'}
-//      </div> 
-//     )
-//   })
-  
-// }
+function Prize(){
+   contacts.map((elem, index)=>{
+     return(
+      <div>
+      {elem.wonEmmy == true && '🏆'}
+      {elem.wonOscar == true && '🏆'}
+      </div> 
+           )
+  }) 
+}
 
 function Add(){
   function handleAdd(){
     let randomContact = contacts[Math.floor(Math.random() * contacts.length)]
     let newArray = [randomContact, ...contacts]
-    setContacts(newArray)
   }
 
   <div>
@@ -55,7 +51,7 @@ function Add(){
 
 function Sort(){
   function handleSortPopularity(){
-    let clonePoularity = JSON.parse(JSON.stringify(allContacts))
+    let clonePoularity = JSON.parse(JSON.stringify(contacts))
     clonePoularity.sort((first, second) =>{
       if(first.popularity > second.popularity){
         return 1
@@ -71,7 +67,7 @@ function Sort(){
   }
 
   function handleSortByname(){
-    let cloneName = JSON.parse(JSON.stringify(allContacts))
+    let cloneName = JSON.parse(JSON.stringify(contacts))
     cloneName.sort((first, second) => {
       if (first.name > second.name) {
           return 1
@@ -96,7 +92,7 @@ function Sort(){
 
 function Remove(){
   function handleDelete(id){
-    let filterContacts = allContacts.filter((elem)= >{
+    let filterContacts = contacts.filter((elem)=>{
       return elem.id !== id
     })
   }
@@ -108,7 +104,7 @@ function App() {
   return (
     <div className="App">
     <Contacts />
-    {/* <Prize /> */}
+    <Prize />
     <Add/>
     <Sort/>
     <Remove/>
